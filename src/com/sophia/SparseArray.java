@@ -31,8 +31,6 @@ public class SparseArray {
 
         System.out.println();
 
-
-
         //create sparse array
         //row clum val
         //11   11    2
@@ -60,6 +58,13 @@ public class SparseArray {
             System.out.printf("%d\t%d\t%d\t\n",sparArray[i][0],sparArray[i][1],sparArray[i][2]);
         }
         System.out.println();
+
+
+
+
+
+
+
 
 
         //Sparse array to two-dimensional array
