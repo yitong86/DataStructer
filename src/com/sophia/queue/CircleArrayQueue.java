@@ -1,10 +1,10 @@
-package com.sophia;
+package com.sophia.queue;
 
 import java.util.Scanner;
 
-public class Queue {
+public class CircleArrayQueue {
     public static void main(String[] args) {
-        ArrayQueue queue = new ArrayQueue(3);
+        CircleArray queue = new CircleArray(4);
         char key = ' ';
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
@@ -51,57 +51,64 @@ public class Queue {
         System.out.println("ending");
     }
 }
-class ArrayQueue{
+class CircleArray{
     private int maxSize;
     private int front;
     private int rear;
     private int[] arr;
 
-    public ArrayQueue(int arrMaxsize){
+    public CircleArray(int arrMaxsize){
         maxSize = arrMaxsize;
-        arr= new int[maxSize];
-        front = -1;
-        rear = -1;
+        arr = new int[maxSize];
     }
     public boolean isFull(){
-        return rear == maxSize -1;
+
+        return (rear + 1) % maxSize == front;
+        //(0 + 1) % 4 = 1 != front=0 return false
+        //(1 + 1) % 4 = 2 != front =0 return false
+        //(2 + 1) % 4 = 3 != front =0 return false
+        // (3 + 1) % 4 = 0 = front = 0 return true->isfull/rear = 3,front = 0
+
     }
     public boolean isEmpty(){
-        return front == rear;
+        return rear == front;
     }
+
     public void addQueue(int n){
         if(isFull()){
             System.out.println("Queue is full ,you cannot add data");
             return;
         }else{
-            rear++;
-            arr[rear] = n;
+           arr[rear] = n;
+           rear = (rear + 1) % maxSize;
         }
-
-
     }
     public int getQueue(){
         if(isEmpty()){
             throw new RuntimeException("Queue is empty.you cannot get data");
         }else{
-            front++;
-            return arr[front];
+            int value = arr[front];
+            front = (front + 1) % maxSize;
+            return value;
         }
     }
     public void showQueue(){
         if(isEmpty()){
             System.out.println("Queue is empty,no data");
         }else{
-            for (int i = 0; i< arr.length;i++){
-                System.out.printf("arr[%d] = %d\n",i ,arr[i]);
+            for (int i = front; i< front + size() ;i++){
+                System.out.printf("arr[%d] = %d\n",i  % maxSize,arr[i  % maxSize]);
             }
         }
     }
+    public  int size(){//rear= 2 front = 1 maxsize =3
+        return (rear + maxSize -front) % maxSize;
+    }
     public int headQueue(){
         if(isEmpty()){
-           throw new RuntimeException("Queue is empty,no data");
+            throw new RuntimeException("Queue is empty,no data");
         }else{
-            return arr[front+1];
+            return arr[front];
         }
     }
 
