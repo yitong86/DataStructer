@@ -33,6 +33,9 @@ public void add(HeroNode heroNode){
     temp.next = heroNode;
 }
 
+public void addByOrder(HeroNode heroNode){
+
+}
 public void list(){
     if(head.next == null){
         return;
