@@ -18,16 +18,16 @@ public class LinkedList {
 
 
 //return head of list
-    public static Node<Integer> addNode(Node<Integer> head,int value){
+    public static Node<Integer> addNode(Node<Integer> head,int value){//1-2-3-4->value = 4
         Node<Integer> newNode = new Node<Integer>(value);
         if(head == null){
             return newNode;
         }
-       Node<Integer> trav  = head;
-        while(trav.next != null){
-            trav = trav.next;
+       Node<Integer> trav  = head;//pointer =1
+        while(trav.next != null){//
+            trav = trav.next;//2->3
         }//trav is at the end of the list
-        trav.next = newNode;
+        trav.next = newNode;//4
         return head;
     }
     public static void displayList(Node<Integer> head){
